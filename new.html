@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang = "ko">
+	<head>
+		<meta charset = "UTF-8">
+		<meta name = "viewport" content = "width=device-width, initial-scale=1">
+		<title>test1111</title>
+	</head>
+	
+	<body>
+	
+		<div id="app">
+			<h1>Vue.js - instense create and Watch</h1>
+			<h3>Count : {{test}}</h3>
+			<button v-on:click="test += 1"> Add +1</button>
+		</div>
+		<div id="appA">
+			<h1>데이터 바인딩 테스트</h1>
+			<h3>데이터바인딩 html</h3>
+			<span v-html="message_html"></span>
+			<br/>
+			<h3>데이터바인딩 속성</h3>
+			<button v-bind:disabled="isButtonDisabled">BUTTON</button>
+		</div>
+		
+		<script src="https://unpkg.com/vue"></script>
+		<script>
+			var data = { test: 0 };
+			
+			var vm = new Vue({
+				el: '#app',
+				data: data,
+				created: function(){
+					console.log('test is : ' + this.test)
+				}
+			})
+			
+			console.log(vm.test === data.test)
+			console.log(vm.$data ===data)
+			
+			vm.$watch('test', function(newVal, oldVal){
+				console.log('preData', oldVal)
+				console.log('afterData', newVal)
+			})
+			
+			var appA = new Vue({
+				el: '#appA',
+				data: {
+					message_html: '<h5 style="color:#ff0000"> Tag출력(O)</h5>',
+					isButtonDisabled: true
+				}
+			})
+		</script>
+		
+	</body>
+<html>
